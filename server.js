@@ -119,6 +119,15 @@ app.use(express.json());
 const ytDlpPath = path.join(__dirname, "bin", "yt-dlp");
 const proxyUrl = "http://130.36.36.29:443";
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello from Express on Vercel!');
+});
+
 app.post("/download", async (req, res) => {
   logWithTimestamp("Received request to /download endpoint");
   const { url } = req.body;
